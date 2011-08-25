@@ -80,7 +80,7 @@ jQuery.fn.unhighlight = function (options) {
 };
 
 jQuery.fn.highlight = function (words, options) {
-    var settings = { className: 'highlight', element: 'span', caseSensitive: false, wordsOnly: false };
+    var settings = { className: 'highlight', element: 'span', caseSensitive: false, wordsOnly: false, startWith: false };
     jQuery.extend(settings, options);
     
     if (words.constructor === String) {
@@ -98,6 +98,8 @@ jQuery.fn.highlight = function (words, options) {
     var pattern = "(" + words.join("|") + ")";
     if (settings.wordsOnly) {
         pattern = "\\b" + pattern + "\\b";
+    } else if (settings.startWith) { 
+        pattern = "\\b" + pattern;
     }
     var re = new RegExp(pattern, flag);
     
